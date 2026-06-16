@@ -9,16 +9,6 @@ import { router } from './router'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    {/* <RouterProvider router={router} /> */}
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 )
-function App() {
-    const [state, setState] = useState(12120);
-    setTimeout(() => {
-      setState(12120)
-    }, 3000)
-  return (
-   <>{ new Date().getTime() }</>
-  )
-}

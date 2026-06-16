@@ -27,9 +27,6 @@ export default function Welcome() {
         {/* White Sphere Grid Background */}
         <div
           className="absolute inset-0 z-0"
-          style={{
-
-          }}
         />
         {/* Your Content/Components */}
       </div>

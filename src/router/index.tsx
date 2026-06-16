@@ -27,7 +27,6 @@ export const router = createBrowserRouter(
         <HomeLayout> <PostPage /></HomeLayout>
       )
     }
-    
   ],{
     basename: '/blog/'
   }

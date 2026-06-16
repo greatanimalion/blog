@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 import DrawSVGPlugin from 'gsap/DrawSVGPlugin'
 import Intro from '@/components/welcome/intro'
- 
+import Header from '@/components/Header'
+
 export default function Welcome() {
   const navigate = useNavigate()
 
@@ -27,6 +28,7 @@ export default function Welcome() {
   }
 
   return (<>
+    <Header />
     <Intro />
     <div
       className="welcome-container min-h-screen text-white "

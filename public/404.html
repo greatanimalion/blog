@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>跳转中...</title>
+    <script>
+      // GitHub Pages SPA 路由重定向
+      // 将当前路径重定向到 index.html，保留完整路径信息
+      sessionStorage.redirect = location.pathname + location.search;
+      location.replace('/blog/');
+    </script>
+  </head>
+  <body>
+    <div>正在跳转...</div>
+  </body>
+</html>

@@ -3,7 +3,7 @@ import { lazy, Suspense } from 'react'
 
 const PostPage = () => {
   const { id } = useParams<{ id: string }>()
-  const MarkdownComponent = lazy(() => import(`@/pages/posts/${id}.md`))
+  const MarkdownComponent = lazy(() => import(`../../posts/${id}.md`))
 
   return (
     <article className="post-content">

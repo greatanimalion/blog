@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import Markdown from '@pity/vite-plugin-react-markdown'
+
 import tailwindcss from '@tailwindcss/vite'
 import { fileURLToPath, URL } from 'node:url'
 
@@ -21,4 +22,5 @@ export default defineConfig({
   preview: {
     port: 4173
   },
+  base: '/blog/'
 })

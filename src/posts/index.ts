@@ -89,7 +89,7 @@ function parseValue(value: string): unknown {
 
 const postsDir = import.meta.glob('./*.md', { eager: true, query: '?raw', import: 'default' })
 const postList: PostMeta[] = []
-
+console.log(import.meta)
 for (const path in postsDir) {
   if (path.includes('index.ts')) continue
   

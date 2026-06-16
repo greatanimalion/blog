@@ -16,9 +16,9 @@ jobs:
         with:
           node-version: '24'
       - name: 安装依赖
-        run: npm ci
+        run: pnpm ci
       - name: 运行测试
-        run: npm test
+        run: pnpm test
 
   # 第二阶段：构建 (CI)
   build:
@@ -32,9 +32,9 @@ jobs:
         with:
           node-version: '18'
       - name: 安装依赖
-        run: npm ci
+        run: pnpm ci
       - name: 打包项目
-        run: npm run build
+        run: pnpm run build
       - name: 上传构建产物
         uses: actions/upload-artifact@v4
         with:

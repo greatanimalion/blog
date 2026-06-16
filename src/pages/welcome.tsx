@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 import DrawSVGPlugin from 'gsap/DrawSVGPlugin'
 import Intro from '@/components/welcome/intro'
-import PillNav from '@/components/t/nav'
+ 
 export default function Welcome() {
   const navigate = useNavigate()
 
@@ -27,23 +27,6 @@ export default function Welcome() {
   }
 
   return (<>
-  <PillNav
-  logo={'https://avatars.githubusercontent.com/u/127655365?v=4&size=64'}
-  logoAlt="Company Logo"
-  items={[
-    { label: '首页', href: '/home' },
-    { label: '关于', href: '/about' },
-    { label: '服务', href: '/services' },
-    { label: '联系', href: '/contact' }
-  ]}
-  activeHref="/"
-  ease="power2.easeOut"
-  baseColor="#000000"
-  pillColor="#ffffff"
-  hoveredPillTextColor="#ffffff"
-  pillTextColor="#000000"
-  initialLoadAnimation={false}
-/>
     <Intro />
     <div
       className="welcome-container min-h-screen text-white "

@@ -1,133 +1,34 @@
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
 
+export default function SkeletonLoader() {
+  const containerRef = useRef<HTMLDivElement>(null);
 
-export default () => {
-    return <>
-        <style>
-            {`
-        /* From Uiverse.io by dexter-st */ 
-.loader-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 180px;
-  height: 180px;
-  font-family: "Inter", sans-serif;
-  font-size: 1.2em;
-  font-weight: 300;
-  color: white;
-  border-radius: 50%;
-  background-color: transparent;
-  user-select: none;
-}
+  useEffect(() => {
+    const items = containerRef.current?.querySelectorAll('.skeleton-item');
+    if (!items) return;
+    // 创建动画
+    const tl = gsap.timeline({ repeat: -1, yoyo: true });
+    tl.to(items, {
+      opacity: 0.5,
+      duration: 0.5,
+      stagger: 0.1,
+      ease: "power1.inOut",
+      repeat: -1,
+      yoyo: true
+    });
+    return () => {
+      tl.kill();
+    };
+  }, []);
 
-.loader {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
-  background-color: transparent;
-  animation: loader-rotate 2s linear infinite;
-  z-index: 0;
-}
-
-@keyframes loader-rotate {
-  0% {
-    transform: rotate(90deg);
-    box-shadow:
-      0 10px 20px 0 #fff inset,
-      0 20px 30px 0 #ad5fff inset,
-      0 60px 60px 0 #471eec inset;
-  }
-  50% {
-    transform: rotate(270deg);
-    box-shadow:
-      0 10px 20px 0 #fff inset,
-      0 20px 10px 0 #d60a47 inset,
-      0 40px 60px 0 #311e80 inset;
-  }
-  100% {
-    transform: rotate(450deg);
-    box-shadow:
-      0 10px 20px 0 #fff inset,
-      0 20px 30px 0 #ad5fff inset,
-      0 60px 60px 0 #471eec inset;
-  }
-}
-
-.loader-letter {
-  display: inline-block;
-  opacity: 0.4;
-  transform: translateY(0);
-  animation: loader-letter-anim 2s infinite;
-  z-index: 1;
-  border-radius: 50ch;
-  border: none;
-}
-
-.loader-letter:nth-child(1) {
-  animation-delay: 0s;
-}
-.loader-letter:nth-child(2) {
-  animation-delay: 0.1s;
-}
-.loader-letter:nth-child(3) {
-  animation-delay: 0.2s;
-}
-.loader-letter:nth-child(4) {
-  animation-delay: 0.3s;
-}
-.loader-letter:nth-child(5) {
-  animation-delay: 0.4s;
-}
-.loader-letter:nth-child(6) {
-  animation-delay: 0.5s;
-}
-.loader-letter:nth-child(7) {
-  animation-delay: 0.6s;
-}
-.loader-letter:nth-child(8) {
-  animation-delay: 0.7s;
-}
-.loader-letter:nth-child(9) {
-  animation-delay: 0.8s;
-}
-.loader-letter:nth-child(10) {
-  animation-delay: 0.9s;
-}
-
-@keyframes loader-letter-anim {
-  0%,
-  100% {
-    opacity: 0.4;
-    transform: translateY(0);
-  }
-  20% {
-    opacity: 1;
-    transform: scale(1.15);
-  }
-  40% {
-    opacity: 0.7;
-    transform: translateY(0);
-  }
-}
-`}
-        </style>
-        <div className="loader-wrapper">
-            <span className="loader-letter">G</span>
-            <span className="loader-letter">e</span>
-            <span className="loader-letter">n</span>
-            <span className="loader-letter">e</span>
-            <span className="loader-letter">r</span>
-            <span className="loader-letter">a</span>
-            <span className="loader-letter">t</span>
-            <span className="loader-letter">i</span>
-            <span className="loader-letter">n</span>
-            <span className="loader-letter">g</span>
-            <div className="loader"></div>
-        </div>
-
-    </>
+  return (
+    <div ref={containerRef} className=" mx-auto mt-25!"  >
+      <div className="skeleton-item" style={{ width: '60%', height: '30px', background: '#e0e0e0', marginBottom: '20px', borderRadius: '4px' }} />
+      <div className="skeleton-item" style={{ width: '100%', height: '150px', background: '#e0e0e0', marginBottom: '20px', borderRadius: '8px' }} />
+      <div className="skeleton-item" style={{ width: '90%', height: '20px', background: '#e0e0e0', marginBottom: '10px', borderRadius: '4px' }} />
+      <div className="skeleton-item" style={{ width: '80%', height: '20px', background: '#e0e0e0', marginBottom: '10px', borderRadius: '4px' }} />
+      <div className="skeleton-item" style={{ width: '70%', height: '20px', background: '#e0e0e0', borderRadius: '4px' }} />
+    </div>
+  );
 }

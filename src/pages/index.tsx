@@ -33,15 +33,16 @@ export default function Home() {
         </div>
       ) : (
         <div className="cards">
-          {posts.map(post => (
+          {posts.map((post,i) => (
             <ElectricBorder
               color="#7df9ff"
+              key={i}
               speed={1}
               chaos={0.12}
               style={{ borderRadius: 16 }}
             >
               <PostCard
-                key={post.slug}
+                key={i}
                 slug={post.slug}
                 title={post.title}
                 date={post.date}

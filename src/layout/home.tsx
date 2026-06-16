@@ -1,5 +1,5 @@
-const LoadingComponent = () => <div className="loading">加载中...</div>
-import { lazy, Suspense } from 'react'
+import Loading from '@/components/loading'
+import {  Suspense } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
@@ -8,7 +8,7 @@ export const HomeLayout = ({children}: {children: React.ReactNode}) => {
      <div className="app">
             <Header />
             <main className="container">
-              <Suspense fallback={<LoadingComponent />}>
+              <Suspense fallback={<Loading />}>
                 {children}
               </Suspense>
             </main>

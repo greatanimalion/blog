@@ -1,38 +1,18 @@
-name: CI/CD Pipeline
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]   # 当 main 分支有代码推送时触发
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  # 第一阶段：测试 (CI)
-  test:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    steps:
-      - name: 检出代码
-        uses: actions/checkout@v4
-
-      - name: 安装 pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9     # 可以换成你项目实际使用的 pnpm 版本（如 8, 9）
-
-      - name: 安装 Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'   # 建议统一版本，pnpm 推荐 LTS
-          cache: 'pnpm'        # 开启缓存加速
-
-      - name: 安装依赖（严格按锁文件）
-        run: pnpm install --frozen-lockfile
-
-      - name: 运行测试
-        run: pnpm test
-
-  # 第二阶段：构建 (CI)
-  build:
-    runs-on: ubuntu-latest
-    needs: test
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
@@ -45,39 +25,19 @@ jobs:
       - name: 安装 Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'      # 与 test 保持一致
-          cache: 'pnpm'
+          node-version: '20'
+          cache: 'npm'
 
       - name: 安装依赖
         run: pnpm install --frozen-lockfile
 
-      - name: 打包项目
-        run: pnpm build            # 确保 package.json 里有 build 脚本
+      - name: 构建项目
+        run: pnpm build
 
       - name: 上传构建产物
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: dist
-          path: dist/
-
-  # 第三阶段：部署 (CD)
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    if: github.event_name == 'push'
-    steps:
-      - name: 下载构建产物
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
           path: dist
 
-      - name: 通过 SSH 部署到服务器
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-rlgoDzvc -i --delete"
-          SOURCE: "dist/"
-          REMOTE_HOST: ${{ secrets.SERVER_HOST }}
-          REMOTE_USER: ${{ secrets.SERVER_USERNAME }}
-          TARGET: "/var/www/myapp/"
+      - name: 部署到 GitHub Pages
+        uses: actions/deploy-pages@v4

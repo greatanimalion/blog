@@ -1,356 +1,70 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-
+import gsap from 'gsap'
+import DrawSVGPlugin from 'gsap/DrawSVGPlugin'
+import Intro from '@/components/welcome/intro'
+import PillNav from '@/components/t/nav'
 export default function Welcome() {
   const navigate = useNavigate()
 
+  useEffect(() => {
+    gsap.registerPlugin(DrawSVGPlugin);
 
+    // 动态绘制路径
+    gsap.fromTo("#svgGroup",
+      { drawSVG: "0%", fill: "0,0,0,0,0)", filter: "blur(1px)" },
+      { drawSVG: "100%", duration: 10, ease: "power2.out", fill: "rgba(0,0,0,1)", filter: "blur(0)" },
+    );
+    gsap.to("#svgGroup", {
+      fill: "rgba(0,0,0,1)",
+      ease: "power2.out",
+      duration: 10,
+    });
+  }, [])
   const handleStart = () => {
 
     navigate('/home')
   }
 
-  return (
+  return (<>
+  <PillNav
+  logo={'https://avatars.githubusercontent.com/u/127655365?v=4&size=64'}
+  logoAlt="Company Logo"
+  items={[
+    { label: '首页', href: '/home' },
+    { label: '关于', href: '/about' },
+    { label: '服务', href: '/services' },
+    { label: '联系', href: '/contact' }
+  ]}
+  activeHref="/"
+  ease="power2.easeOut"
+  baseColor="#000000"
+  pillColor="#ffffff"
+  hoveredPillTextColor="#ffffff"
+  pillTextColor="#000000"
+  initialLoadAnimation={false}
+/>
+    <Intro />
     <div
       className="welcome-container min-h-screen text-white "
       style={{
-          background: "white",
-          backgroundImage: `
+        background: "white",
+        backgroundImage: `
        linear-gradient(to right, rgba(71,85,105,0.3) 1px, transparent 1px),
        linear-gradient(to bottom, rgba(71,85,105,0.3) 1px, transparent 1px),
        radial-gradient(circle at 50% 50%, rgba(139,92,246,0.25) 0%, rgba(139,92,246,0.1) 40%, transparent 80%)
      `,
-          backgroundSize: "32px 32px, 32px 32px, 100% 100%",
-        }}
+        backgroundSize: "32px 32px, 32px 32px, 100% 100%",
+      }}
     >
-      <div className="min-h-screen w-full bg-white relative">
-        {/* White Sphere Grid Background */}
-        <div
-          className="absolute inset-0 z-0"
-        />
-        {/* Your Content/Components */}
-      </div>
-      <div className="welcome-content">
-        <section className="hero-section">
-          <div className="avatar-wrapper">
-            <div className="avatar">
-              <svg viewBox="0 0 200 200" className="w-full h-full">
-                <defs>
-                  <linearGradient id="avatarGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#3b82f6" />
-                    <stop offset="100%" stopColor="#8b5cf6" />
-                  </linearGradient>
-                </defs>
-                <circle cx="100" cy="100" r="80" fill="url(#avatarGradient)" />
-                <circle cx="100" cy="100" r="75" fill="#1e293b" />
-                <circle cx="75" cy="85" r="8" fill="#fff" />
-                <circle cx="125" cy="85" r="8" fill="#fff" />
-                <circle cx="77" cy="83" r="3" fill="#1e293b" />
-                <circle cx="127" cy="83" r="3" fill="#1e293b" />
-                <path d="M 70 120 Q 100 140 130 120" stroke="#fff" strokeWidth="3" fill="none" strokeLinecap="round" />
-                <circle cx="100" cy="60" r="15" fill="#3b82f6" />
-              </svg>
-            </div>
-          </div>
 
-          <h1 className="name-title">
-            <span className="letter" style={{ animationDelay: '0s' }}>你</span>
-            <span className="letter" style={{ animationDelay: '0.1s' }}>好</span>
-            <span className="letter" style={{ animationDelay: '0.2s' }}>，</span>
-            <br />
-            <span className="letter" style={{ animationDelay: '0.3s' }}>我</span>
-            <span className="letter" style={{ animationDelay: '0.4s' }}>是</span>
-            <span className="letter highlight" style={{ animationDelay: '0.5s' }}>LB</span>
-          </h1>
-
-          <p className="subtitle">欢迎来到我的博客世界</p>
-        </section>
-
-        <section className="intro-section">
-          <div className="section-title">关于我</div>
-          <div className="timeline">
-            <div className="timeline-item">
-              <div className="timeline-dot"></div>
-              <div className="timeline-content">
-                <h3>前端开发者</h3>
-                <p>热爱 React、Vue、TypeScript</p>
-              </div>
-            </div>
-            <div className="timeline-item">
-              <div className="timeline-dot"></div>
-              <div className="timeline-content">
-                <h3>技术博主</h3>
-                <p>分享技术心得与最佳实践</p>
-              </div>
-            </div>
-            <div className="timeline-item">
-              <div className="timeline-dot"></div>
-              <div className="timeline-content">
-                <h3>开源爱好者</h3>
-                <p>积极参与开源社区贡献</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="tech-section">
-          <div className="section-title">技术栈</div>
-          <div className="tech-tags">
-            {['React', 'Vue', 'TypeScript', 'Node.js', 'Vite', 'Tailwind CSS', 'Docker', 'Git'].map((tag, index) => (
-              <span
-                key={tag}
-                className="tech-tag"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </section>
-
-        <section className="scroll-hint">
-          <div className="scroll-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M12 5v14M5 12l7 7 7-7" />
-            </svg>
-          </div>
-          <p>向下滚动探索</p>
-        </section>
-      </div>
-      <div className="start-overlay" >
-        <button className="start-btn" onClick={handleStart}>
-          <span className="btn-text">开始探索</span>
-          <span className="btn-icon" >→</span>
-        </button>
-      </div>
-      <style>{`
-        .welcome-container {
-          scrollbar-width: none;
-          -ms-overflow-style: none;
-        }
-        .welcome-container::-webkit-scrollbar {
-          display: none;
-        }
-        .welcome-content {
-          padding: 60px 20px;
-          max-width: 800px;
-          margin: 0 auto;
-        }
-        .hero-section {
-          text-align: center;
-          padding: 80px 0 120px;
-        }
-        .avatar-wrapper {
-          margin-bottom: 40px;
-        }
-        .avatar {
-          width: 180px;
-          height: 180px;
-          margin: 0 auto;
-          animation: float 3s ease-in-out infinite;
-        }
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
-        .name-title {
-          font-size: 3rem;
-          font-weight: 800;
-          margin-bottom: 20px;
-          letter-spacing: 8px;
-        }
-        .letter {
-          display: inline-block;
-          opacity: 0;
-          animation: fadeInUp 0.6s ease forwards;
-        }
-        .letter.highlight {
-          color: #3b82f6;
-        }
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .subtitle {
-          font-size: 1.2rem;
-          color: #94a3b8;
-          letter-spacing: 4px;
-        }
-        .section-title {
-          font-size: 1.5rem;
-          font-weight: 600;
-          margin-bottom: 40px;
-          color: #3b82f6;
-          text-align: center;
-        }
-        .intro-section {
-          padding: 60px 0;
-        }
-        .timeline {
-          position: relative;
-        }
-        .timeline::before {
-          content: '';
-          position: absolute;
-          left: 50%;
-          top: 0;
-          bottom: 0;
-          width: 2px;
-          background: linear-gradient(180deg, #3b82f6, #8b5cf6);
-          transform: translateX(-50%);
-        }
-        .timeline-item {
-          position: relative;
-          margin-bottom: 50px;
-          display: flex;
-          align-items: center;
-        }
-        .timeline-item:nth-child(odd) {
-          flex-direction: row-reverse;
-        }
-        .timeline-dot {
-          width: 20px;
-          height: 20px;
-          border-radius: 50%;
-          background: #3b82f6;
-          border: 3px solid #1e293b;
-          position: absolute;
-          left: 50%;
-          transform: translateX(-50%);
-          z-index: 1;
-        }
-        .timeline-content {
-          width: 40%;
-          background: rgba(30, 41, 59, 0.8);
-          padding: 25px;
-          border-radius: 12px;
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(59, 130, 246, 0.3);
-        }
-        .timeline-content h3 {
-          color: #fff;
-          margin-bottom: 10px;
-          font-size: 1.2rem;
-        }
-        .timeline-content p {
-          color: #94a3b8;
-          margin: 0;
-        }
-        .tech-section {
-          padding: 60px 0 100px;
-        }
-        .tech-tags {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 15px;
-          justify-content: center;
-        }
-        .tech-tag {
-          padding: 12px 24px;
-          background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
-          border: 1px solid rgba(59, 130, 246, 0.3);
-          border-radius: 30px;
-          color: #94a3b8;
-          font-size: 0.9rem;
-          opacity: 0;
-          animation: fadeInUp 0.5s ease forwards;
-        }
-        .scroll-hint {
-          text-align: center;
-          padding: 40px 0;
-          opacity: 0.6;
-          animation: pulse 2s ease-in-out infinite;
-        }
-        @keyframes pulse {
-          0%, 100% { opacity: 0.4; }
-          50% { opacity: 0.8; }
-        }
-        .scroll-icon {
-          width: 40px;
-          height: 40px;
-          margin: 0 auto 15px;
-          animation: bounce 2s ease-in-out infinite;
-        }
-        @keyframes bounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(10px); }
-        }
-        .scroll-icon svg {
-          width: 100%;
-          height: 100%;
-        }
-        .start-overlay {
-          position: fixed;
-          bottom: 40px;
-          left: 50%;
-          transform: translateX(-50%);
-          z-index: 100;
-          animation: slideUp 0.5s ease;
-        }
-        @keyframes slideUp {
-          from {
-            opacity: 0;
-            transform: translateX(-50%) translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-          }
-        }
-        .start-btn {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          padding: 16px 32px;
-          background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-          border: none;
-          border-radius: 50px;
-          color: #fff;
-          font-size: 1.1rem;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
-        }
-        .start-btn:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 15px 40px rgba(59, 130, 246, 0.5);
-        }
-        .btn-icon {
-          font-size: 1.3rem;
-          transition: transform 0.3s ease;
-        }
-        .start-btn:hover .btn-icon {
-          transform: translateX(5px);
-        }
-        @media (max-width: 640px) {
-          .name-title {
-            font-size: 2rem;
-            letter-spacing: 4px;
-          }
-          .timeline::before {
-            left: 20px;
-          }
-          .timeline-dot {
-            left: 20px;
-          }
-          .timeline-item,
-          .timeline-item:nth-child(odd) {
-            flex-direction: column;
-            align-items: flex-start;
-            padding-left: 50px;
-          }
-          .timeline-content {
-            width: 100%;
-          }
-        }
-      `}</style>
+      <svg width="327.025" height="92.65" viewBox="-2 -2 327.025 92.65" xmlns="http://www.w3.org/2000/svg">
+        <g strokeLinecap="round" fillRule="nonzero" stroke="#000000" strokeWidth="1">
+          <path id="svgGroup" d="M24.225 69L15.375 69L1.125 18.225L8.175 15.975L20.025 61.425L31.200 21.975L40.125 21.975L51.225 61.425L63 16.200L69.600 18.225L55.425 69L46.575 69L35.475 29.550L24.225 69ZM90.075 69.900L90.075 69.900Q81.675 69.900 76.762 64.537Q71.850 59.175 71.850 49.500L71.850 49.500Q71.850 43.650 74.063 39.038Q76.275 34.425 80.250 31.763Q84.225 29.100 89.475 29.100L89.475 29.100Q95.100 29.100 98.813 31.538Q102.525 33.975 104.400 38.100Q106.275 42.225 106.275 47.175L106.275 47.175Q106.275 49.800 106.050 52.275L106.050 52.275L78.750 52.275Q79.425 57.750 82.575 60.825Q85.725 63.900 90.900 63.900L90.900 63.900Q94.275 63.900 96.975 63.188Q99.675 62.475 102.150 61.350L102.150 61.350L103.725 67.125Q101.025 68.325 97.650 69.112Q94.275 69.900 90.075 69.900ZM78.675 46.800L78.675 46.800L100.050 46.800Q100.050 41.100 97.200 38.025Q94.350 34.950 89.325 34.950L89.325 34.950Q84.975 34.950 82.125 37.987Q79.275 41.025 78.675 46.800ZM127.125 69.900L127.125 69.900Q123.675 69.900 120.900 68.588Q118.125 67.275 116.512 64.350Q114.900 61.425 114.900 56.775L114.900 56.775L114.900 13.500L121.650 13.500L121.650 56.100Q121.650 60.150 123.337 62.100Q125.025 64.050 128.025 64.050L128.025 64.050Q129.450 64.050 130.837 63.712Q132.225 63.375 133.200 62.925L133.200 62.925L134.850 68.400Q133.500 69 131.512 69.450Q129.525 69.900 127.125 69.900ZM155.850 69.900L155.850 69.900Q150.300 69.900 146.137 67.313Q141.975 64.725 139.725 60.112Q137.475 55.500 137.475 49.500L137.475 49.500Q137.475 43.875 139.762 39.225Q142.050 34.575 146.325 31.837Q150.600 29.100 156.375 29.100L156.375 29.100Q159.675 29.100 162.188 29.700Q164.700 30.300 167.025 31.425L167.025 31.425L165 37.125Q162.900 36.075 160.987 35.587Q159.075 35.100 156.750 35.100L156.750 35.100Q151.500 35.100 147.938 38.888Q144.375 42.675 144.375 49.350L144.375 49.350Q144.375 53.400 145.875 56.700Q147.375 60 150.037 61.950Q152.700 63.900 156.300 63.900L156.300 63.900Q159.150 63.900 161.175 63.263Q163.200 62.625 165.525 61.425L165.525 61.425L167.625 67.125Q165.300 68.400 162.412 69.150Q159.525 69.900 155.850 69.900ZM191.175 69.900L191.175 69.900Q185.625 69.900 181.200 67.313Q176.775 64.725 174.262 60.112Q171.750 55.500 171.750 49.500L171.750 49.500Q171.750 43.200 174.300 38.625Q176.850 34.050 181.275 31.575Q185.700 29.100 191.175 29.100L191.175 29.100Q196.650 29.100 201.037 31.575Q205.425 34.050 208.012 38.588Q210.600 43.125 210.600 49.350L210.600 49.350Q210.600 55.575 208.050 60.188Q205.500 64.800 201.113 67.350Q196.725 69.900 191.175 69.900ZM191.175 63.900L191.175 63.900Q197.100 63.900 200.400 59.888Q203.700 55.875 203.700 49.500L203.700 49.500Q203.700 45.600 202.050 42.338Q200.400 39.075 197.588 37.088Q194.775 35.100 191.175 35.100L191.175 35.100Q185.250 35.100 181.950 39Q178.650 42.900 178.650 49.350L178.650 49.350Q178.650 53.250 180.300 56.587Q181.950 59.925 184.762 61.913Q187.575 63.900 191.175 63.900ZM226.350 69L219.600 69L219.600 30L226.125 30L226.125 36.525Q228.225 33.375 231.450 31.238Q234.675 29.100 238.800 29.100L238.800 29.100Q243.450 29.100 246.412 31.350Q249.375 33.600 250.575 37.350L250.575 37.350Q252.900 33.900 256.087 31.500Q259.275 29.100 264 29.100L264 29.100Q270.375 29.100 273.488 33.113Q276.600 37.125 276.600 43.575L276.600 43.575L276.600 69L269.850 69L269.850 44.100Q269.850 40.050 267.975 37.538Q266.100 35.025 262.800 35.025L262.800 35.025Q259.425 35.025 256.538 37.538Q253.650 40.050 251.475 43.425L251.475 43.425L251.475 69L244.725 69L244.725 44.100Q244.725 40.050 242.850 37.538Q240.975 35.025 237.675 35.025L237.675 35.025Q234.375 35.025 231.450 37.463Q228.525 39.900 226.350 43.200L226.350 43.200L226.350 69ZM303.825 69.900L303.825 69.900Q295.425 69.900 290.513 64.537Q285.600 59.175 285.600 49.500L285.600 49.500Q285.600 43.650 287.813 39.038Q290.025 34.425 294 31.763Q297.975 29.100 303.225 29.100L303.225 29.100Q308.850 29.100 312.563 31.538Q316.275 33.975 318.150 38.100Q320.025 42.225 320.025 47.175L320.025 47.175Q320.025 49.800 319.800 52.275L319.800 52.275L292.500 52.275Q293.175 57.750 296.325 60.825Q299.475 63.900 304.650 63.900L304.650 63.900Q308.025 63.900 310.725 63.188Q313.425 62.475 315.900 61.350L315.900 61.350L317.475 67.125Q314.775 68.325 311.400 69.112Q308.025 69.900 303.825 69.900ZM292.425 46.800L292.425 46.800L313.800 46.800Q313.800 41.100 310.950 38.025Q308.100 34.950 303.075 34.950L303.075 34.950Q298.725 34.950 295.875 37.987Q293.025 41.025 292.425 46.800Z" />
+        </g>
+      </svg>
     </div>
+  </>
+
   )
 }

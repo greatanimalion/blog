@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --primary-color: #3b82f6;
-  --primary-hover: #2563eb;
+  --primary-color: #686868;
+  --primary-hover: #535353;
   --secondary-color: #64748b;
   --background-color: #f8fafc;
   --card-background: #ffffff;
@@ -13,7 +13,17 @@
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
-
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.05);
+}
 * {
   margin: 0;
   padding: 0;
@@ -24,16 +34,7 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 
-               'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 
-               'Noto Color Emoji';
-  background-color: var(--background-color);
-  color: var(--text-primary);
-  line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+
 
 #root {
   min-height: 100vh;
@@ -45,13 +46,20 @@ body {
   padding: 0 24px;
 }
 
-/* Header */
 .header {
-  background: linear-gradient(135deg, #1e3a5f 0%, #2d4a6f 100%);
-  color: #fff;
-  padding: 2rem 0;
-  margin-bottom: 2.5rem;
-  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(11px);
+  -webkit-backdrop-filter: blur(11px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+  border-radius: 25px;
+  -webkit-border-radius: 25px;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  padding: 10px;
+  z-index: 9999;
 }
 
 .header .container {
@@ -61,61 +69,44 @@ body {
 }
 
 .header a {
-  color: #fff;
+  color: #050505;
   text-decoration: none;
   transition: all 0.2s ease;
 }
 
-.header h1 {
-  font-size: 1.9rem;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-}
 
 .header h1 a:hover {
   opacity: 0.9;
 }
 
-.header nav {
-  display: flex;
-  gap: 1.5rem;
-}
 
-.header nav a {
-  font-size: 0.95rem;
-  opacity: 0.85;
-  padding: 0.5rem 0;
-  border-bottom: 2px solid transparent;
-}
 
 .header nav a:hover {
   opacity: 1;
   border-bottom-color: rgba(255, 255, 255, 0.5);
 }
 
-/* Footer */
+
 .footer {
-  background-color: #1e293b;
-  color: #cbd5e1;
+  color: #080808;
   padding: 2rem 0;
   text-align: center;
   margin-top: 4rem;
   font-size: 0.9rem;
-}
-
-.footer p {
   opacity: 0.8;
 }
 
-/* Cards */
+
+
 .card {
   background-color: var(--card-background);
   border-radius: 12px;
   box-shadow: var(--shadow-md);
   padding: 1.75rem;
   margin-bottom: 1.5rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 1px solid var(--border-color);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
   cursor: pointer;
 }
 
@@ -156,10 +147,10 @@ body {
 }
 
 .card .meta .tag {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+  background: var(--primary-color);
   color: #fff;
   padding: 0.25rem 0.6rem;
-  border-radius: 20px;
+  border-radius: 3px;
   font-size: 0.75rem;
   font-weight: 500;
 }
@@ -170,17 +161,19 @@ body {
   line-height: 1.7;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* Post Content */
+
 .post-content {
   background-color: var(--card-background);
   border-radius: 12px;
   box-shadow: var(--shadow-lg);
   padding: 2.5rem;
   border: 1px solid var(--border-color);
+  margin-top: 90px;
 }
 
 .post-content .post-header {
@@ -279,36 +272,36 @@ body {
   .container {
     padding: 0 16px;
   }
-  
+
   .header {
     padding: 1.5rem 0;
     margin-bottom: 2rem;
   }
-  
+
   .header h1 {
     font-size: 1.5rem;
   }
-  
+
   .card {
     padding: 1.25rem;
   }
-  
+
   .card h2 {
     font-size: 1.3rem;
   }
-  
+
   .post-content {
     padding: 1.5rem;
   }
-  
+
   .post-content .post-header h1 {
     font-size: 1.75rem;
   }
-  
+
   .markdown-body h1 {
     font-size: 1.5rem;
   }
-  
+
   .markdown-body h2 {
     font-size: 1.3rem;
   }

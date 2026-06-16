@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 export default function Header() {
   return (
     <header className="header">
-      <div className=" flex justify-between items-center">
-        <Link to="/">欢迎</Link>
+      <div className=" flex justify-between items-center backdrop-blur-[10px]!">
+        <Link to="/">欢迎页</Link>
         <Link to="/home">我的博客</Link>
-        <Link to="/home">首页</Link>
+        <Link to="/home">关于我</Link>
       </div>
     </header>
   )

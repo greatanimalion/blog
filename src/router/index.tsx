@@ -3,7 +3,6 @@ import { createBrowserRouter } from 'react-router-dom'
 import { lazy } from 'react'
 import Welcome from '@/pages/welcome'
 import HomeLayout from '@/layout/home'
-import AboutMe from '@/pages/aboutMe'
 
 const Home = lazy(() => import('@/pages/index'))
 const PostPage = lazy(() => import('@/pages/posts/[id]'))
@@ -21,14 +20,9 @@ export const router = createBrowserRouter(
         <HomeLayout> <Home /></HomeLayout>
 
       )
-    },{
-      path: '/aboutMe',
-      element: (
-        <HomeLayout> <AboutMe /></HomeLayout>
-      )
-    },
+    }, 
     {
-      path: '/posts/:id',
+      path: '/posts/:id/:title',
       element: (
         <HomeLayout> <PostPage /></HomeLayout>
       )

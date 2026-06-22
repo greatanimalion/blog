@@ -1,5 +1,5 @@
-import SplitText from '@/components/t/SplitText'
-import TextType from '../t/textType'
+
+import TextType from '@/components/t/textType'
 export default function Intro() {
     return (
         <div className="intro h-full w-full">
@@ -12,7 +12,7 @@ export default function Intro() {
                 />
                 <div className="text-center pt-[30vh]!">
                     <TextType
-                        text={["Text typing effect", "for your websites", "Happy coding!"]}
+                        text={["人生得意需尽欢", "莫使金酒空对月"]}
                         typingSpeed={75}
                         pauseDuration={1500}
                         showCursor
@@ -23,7 +23,7 @@ export default function Intro() {
                             position: "relative",
                             zIndex: 9,
                             color: "black",
-                            fontSize: "7rem",
+                            fontSize: "5rem",
                             fontWeight: "bold",
                         }}
                     /> 

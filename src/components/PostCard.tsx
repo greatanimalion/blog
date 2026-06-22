@@ -12,7 +12,7 @@ export default function PostCard({ slug, title, date, tags, excerpt }: PostCardP
   return (
     <article className="shadow-md p-7!  rounded-2xl mb-7!  duration-200 cursor-pointer   bg-white/10 backdrop-blur-[5px]"> 
       <h2 className="text-2xl font-bold mb-3!">
-        <Link to={`/posts/${slug}`} className="text-(--text-primary)   transition-colors duration-200 hover:text-(--primary-color)">{title}</Link>
+        <Link to={`/posts/${slug}/${title}`} className="text-(--text-primary)   transition-colors duration-200 hover:text-(--primary-color)">{title}</Link>
       </h2>
       <div className="flex items-center gap-6 text-sm text-(--text-secondary) mb-4">
         <span>{date}</span> 

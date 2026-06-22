@@ -49,14 +49,24 @@ pnpm build
 
 在 `src/posts/` 目录下创建 `YYYY-MM-DD-标题.md` 文件：
 
-```markdown
+```js
 ---
 title: 文章标题
 date: 2025-03-18
 tags: [React, 博客]
 ---
+正文内容...
+```
+当md中需要应用本地图片时，需要将图片放在`src/public/`目录下，然后在md中引用，引用时需要加入/blog前缀，如将aaa.img放在public下，引用时为`<img src="/blog/aaa.img" alt="aaa" />`。
 
-# 正文内容...
+```js
+---
+title: 文章标题
+date: 2025-03-18
+tags: [React, 博客]
+---
+正文内容...
+<img src="/public/vite.svg" alt="setup 函数" />
 ```
 
 其中 Frontmatter 元数据必须包含 `title`、`date`、`tags` 字段。

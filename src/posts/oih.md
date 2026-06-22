@@ -29,7 +29,7 @@ console.log(greeting)
 3. 代码高亮
 4. Frontmatter 元数据
 
-> 这是一段引用文字。
+
 
 | 功能 | 状态 |
 |------|------|

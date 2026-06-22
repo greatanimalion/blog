@@ -95,12 +95,10 @@ for (const path in postsDir) {
   
   const fileContent = postsDir[path] as string
   const { data, body } = parseFrontmatter(fileContent)
-  
   const match = path.match(/\.\/(.+)\.md$/)
   const slug = match ? match[1] : ''
-  
+
   const excerpt = body.slice(0, 150).replace(/[#*`\[\]]/g, '').replace(/\n+/g, ' ').trim() + '...'
-  
   postList.push({
     slug,
     title: (data.title as string) || slug,

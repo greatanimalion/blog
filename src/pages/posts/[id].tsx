@@ -4,7 +4,7 @@ import Particles from '@/components/t/Particles'
 import Loading from '@/components/loading'
 
 const PostPage = () => {
-  const { id } = useParams<{ id: string }>()
+  const { id, title } = useParams<{ id: string, title: string }>()
   const MarkdownComponent = lazy(() => import(`../../posts/${id}.md`))
 
   return (<>
@@ -21,8 +21,10 @@ const PostPage = () => {
         pixelRatio={1}
       />
     </div>
+   
     <article className="post-content relative z-1">
       <Suspense fallback={<Loading />}>
+        <h1>{title}</h1>
         <MarkdownComponent  />
       </Suspense>
     </article>

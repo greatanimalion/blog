@@ -4,6 +4,7 @@ import gsap from 'gsap'
 import DrawSVGPlugin from 'gsap/DrawSVGPlugin'
 import Intro from '@/components/welcome/intro'
 import Header from '@/components/Header'
+import Pize from '@/components/welcome/pize'
 
 export default function Welcome() {
   const navigate = useNavigate()
@@ -25,6 +26,7 @@ export default function Welcome() {
   return (<>
     <Header />
     <Intro />
+    <Pize />
     <div
       className="welcome-container min-h-screen text-white "
       style={{
